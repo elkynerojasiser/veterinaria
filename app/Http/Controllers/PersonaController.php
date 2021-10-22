@@ -14,7 +14,8 @@ class PersonaController extends Controller
      */
     public function index()
     {
-        //
+        $personas = Persona::all();
+        return view('personas.index',compact(['personas']));
     }
 
     /**
@@ -24,7 +25,7 @@ class PersonaController extends Controller
      */
     public function create()
     {
-        //
+        return view('personas.create');
     }
 
     /**
@@ -35,7 +36,16 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Persona::create($request->all());
+        // Persona::create([
+        //     "cedula"    => $request->get('cedula'),
+        //     "nombre"    => $request->get('nombre'),
+        //     "apellido"  => $request->get('apellido'),
+        //     "direccion" => $request->get('direccion'),
+        //     "telefono"  => $request->get('telefono')
+        // ]);
+
+        return redirect()->route('personas.index');
     }
 
     /**
@@ -46,7 +56,9 @@ class PersonaController extends Controller
      */
     public function show($id)
     {
-        //
+        $persona = Persona::find($id);
+
+        return view('personas.show',compact(['persona']));
     }
 
     /**
@@ -57,7 +69,9 @@ class PersonaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $persona = Persona::find($id);
+
+        return view('personas.edit',compact(['persona']));
     }
 
     /**
@@ -69,7 +83,15 @@ class PersonaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $persona = Persona::find($id);
+        // $persona->fill([
+        //     "cedula" => $request->get('cedula'),
+        //     "nombre" => $request->get('nombre')
+        // ]);
+        $persona->fill($request->all());
+        $persona->save();
+
+        return redirect()->route('personas.index');
     }
 
     /**
@@ -82,4 +104,6 @@ class PersonaController extends Controller
     {
         //
     }
+
+
 }

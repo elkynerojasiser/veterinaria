@@ -11,6 +11,10 @@
 |
 */
 
+use App\Http\Controllers\PersonaController;
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('personas', 'PersonaController');
