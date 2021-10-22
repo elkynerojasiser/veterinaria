@@ -102,8 +102,15 @@ class PersonaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $persona = Persona::find($id);
+        $persona->delete();
+        return redirect()->route('personas.index');
     }
 
+    public function delete($id)
+    {
+        $persona = Persona::find($id);
+        return view('personas.delete',compact(['persona']));
+    }
 
 }

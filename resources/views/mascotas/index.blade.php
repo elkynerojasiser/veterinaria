@@ -15,13 +15,16 @@
         <div class="row">
             <div class="col text-center">
                 <h1 class="text-primary">
-                    Listado de personas
+                    Listado de mascotas de {{ $persona->nombre }} {{ $persona->apellido }}
                 </h1>
             </div>
         </div>
         <div class="row pt-3 pb-3">
             <div class="col">
-                <a href="{{ route('personas.create') }}" class="btn btn-primary">Nueva persona</a>
+                <a href="{{ route('personas.index') }}" class="btn btn-success">Regresar a personas</a>
+            </div>
+            <div class="col">
+                <a href="{{ route('mascotas.create',['persona_id'=>$persona->id]) }}" class="btn btn-primary">Crear nueva mascota</a>
             </div>
         </div>
         <div class="row">
@@ -29,40 +32,45 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <td>Cédula</td>
                             <td>Nombre</td>
-                            <td>Apellido</td>
-                            <td>Dirección</td>
-                            <td>Teléfono</td>
-                            <td>Acciones</td>
+                            <td>Especie</td>
+                            <td>Edad</td>
+                            <td>Color</td>
+                            <td>Peso</td>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($personas as $persona)
+                        @if(count($mascotas)>0)
+                        @foreach ($mascotas as $mascota)
                             <tr>
-                                <td>{{ $persona->cedula }}</td>
-                                <td>{{ $persona->nombre }}</td>
-                                <td>{{ $persona->apellido }}</td>
-                                <td>{{ $persona->direccion }}</td>
-                                <td>{{ $persona->telefono }}</td>
+                                <td>{{ $mascota->nombre }}</td>
+                                <td>{{ $mascota->especie }}</td>
+                                <td>{{ $mascota->edad }}</td>
+                                <td>{{ $mascota->color->nombre }}</td>
+                                <td>{{ $mascota->peso }}</td>
                                 <td>
                                     <div class="row">
                                         <div class="col">
-                                            <a href="{{ route('personas.show',['persona'=>$persona->id]) }}" class="btn btn-info">Detalle</a>
+                                            <a href="#">Detalle</a>
                                         </div>
                                         <div class="col">
-                                            <a href="{{ route('personas.edit',['persona'=>$persona->id]) }}" class="btn btn-warning">Editar</a>
+                                            <a href="#" class="btn btn-warning">Editar</a>
                                         </div>
                                         <div class="col">
-                                            <a href="{{ route('personas.delete',['persona' => $persona->id]) }}" class="btn btn-danger">Eliminar</a>
+                                            <a href="#" class="btn btn-danger">Eliminar</a>
                                         </div>
-                                        <div class="col">
-                                            <a href="{{ route('mascotas.index',['persona_id' => $persona->id]) }}" class="btn btn-primary">Mascotas</a>
-                                        </div>
+
                                     </div>
                                 </td>
                             </tr>
                         @endforeach
+                        @else
+                        <tr>
+                            <td colspan="5">
+                                Esta persona no tiene mascotas registradas
+                            </td>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

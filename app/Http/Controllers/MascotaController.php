@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Persona;
+use App\Mascota;
+use App\Color;
 
 class MascotaController extends Controller
 {
@@ -16,14 +19,24 @@ class MascotaController extends Controller
         //
     }
 
+    public function listarPorPersona($persona_id)
+    {
+        $persona = Persona::find($persona_id);
+        $mascotas = $persona->mascotas;
+        return view('mascotas.index',compact(['persona','mascotas']));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($persona_id)
     {
-        //
+        $colores = Color::all();
+        $persona = Persona::find($persona_id);
+
+        return view('mascotas.create',compact(['colores','persona']));
     }
 
     /**
@@ -34,7 +47,8 @@ class MascotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mascota = Mascota::create($request->all());
+        return redirect()->route('mascotas.index',['persona_id' => $request->get('persona_id')]);
     }
 
     /**

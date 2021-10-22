@@ -18,7 +18,7 @@ class CreateMascotasTable extends Migration
             $table->string('nombre');
             $table->enum('especie',['canino','felino','ave','reptil','bovino','equino']);
             $table->double('peso')->default(0.0);
-            $table->string('color')->nullable();
+            $table->unsignedBigInteger('color_id')->index();
             $table->integer('edad');
             $table->bigInteger('persona_id')->unsigned()->index();
             $table->timestamps();
@@ -26,6 +26,9 @@ class CreateMascotasTable extends Migration
             //llave foranea
 
             $table->foreign('persona_id')->references('id')->on('personas')
+            ->onUpdate('cascade')->onDelete('restrict');
+
+            $table->foreign('color_id')->references('id')->on('colores')
             ->onUpdate('cascade')->onDelete('restrict');
         });
     }
