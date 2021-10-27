@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PersonasStoreRequest;
 use App\Persona;
 
 class PersonaController extends Controller
@@ -15,7 +16,7 @@ class PersonaController extends Controller
     public function index()
     {
         $personas = Persona::all();
-        return view('personas.index',compact(['personas']));
+        return view('personas.index', compact(['personas']));
     }
 
     /**
@@ -34,7 +35,7 @@ class PersonaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PersonasStoreRequest $request)
     {
         Persona::create($request->all());
         // Persona::create([
@@ -44,7 +45,6 @@ class PersonaController extends Controller
         //     "direccion" => $request->get('direccion'),
         //     "telefono"  => $request->get('telefono')
         // ]);
-
         return redirect()->route('personas.index');
     }
 
@@ -58,7 +58,7 @@ class PersonaController extends Controller
     {
         $persona = Persona::find($id);
 
-        return view('personas.show',compact(['persona']));
+        return view('personas.show', compact(['persona']));
     }
 
     /**
@@ -71,7 +71,7 @@ class PersonaController extends Controller
     {
         $persona = Persona::find($id);
 
-        return view('personas.edit',compact(['persona']));
+        return view('personas.edit', compact(['persona']));
     }
 
     /**
@@ -110,7 +110,6 @@ class PersonaController extends Controller
     public function delete($id)
     {
         $persona = Persona::find($id);
-        return view('personas.delete',compact(['persona']));
+        return view('personas.delete', compact(['persona']));
     }
-
 }

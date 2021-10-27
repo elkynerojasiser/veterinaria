@@ -20,6 +20,7 @@ class CreatePersonasTable extends Migration
             $table->string('apellido');
             $table->string('direccion');
             $table->string('telefono');
+            $table->longText('imagen')->nullable();
             $table->timestamps();
         });
     }

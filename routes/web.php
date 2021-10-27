@@ -29,9 +29,13 @@ Route::get('personas/{persona}/delete', 'PersonaController@delete')->name('perso
  */
 
 Route::get('mascotas/{persona_id}', 'MascotaController@listarPorPersona')->name('mascotas.index');
-Route::get('mascotas/{persona_id}/create', 'MascotaController@create')->name('mascotas.create');
+Route::get('mascotas/{persona_id}/create', 'MascotaController@create')->middleware(['auth', 'isadmin'])->name('mascotas.create');
 Route::get('mascotas/{mascota}/edit', 'MascotaController@edit')->name('mascotas.edit');
 Route::get('mascotas/{mascota}/delete', 'MascotaController@delete')->name('mascotas.delete');
 Route::delete('mascotas/{mascota}', 'MascotaController@destroy')->name('mascotas.destroy');
 Route::post('mascotas', 'MascotaController@store')->name('mascotas.store');
 Route::put('mascotas/{mascota}/update', 'MascotaController@update')->name('mascotas.update');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

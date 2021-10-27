@@ -14,11 +14,12 @@ class Persona extends Model
         'nombre',
         'apellido',
         'direccion',
-        'telefono'
+        'telefono',
+        'imagen'
     ];
 
-    public function mascotas ()
+    public function mascotas()
     {
-        return $this->hasMany('App\Mascota','persona_id');
+        return $this->hasMany('App\Mascota', 'persona_id');
     }
 }

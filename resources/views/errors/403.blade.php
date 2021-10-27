@@ -17,44 +17,8 @@
     <div class="container">
         <div class="row">
             <div class="col text-center">
-                <h1 class="text-primary">
-                    Listado de personas
-                </h1>
-            </div>
-        </div>
-        <div class="row pt-3 pb-3">
-            <div class="col">
-                <a href="{{ route('personas.index') }}" class="btn btn-primary">Regresar al listado</a>
-            </div>
-        </div>
-        <div class="row d-flex justify-content-center">
-            <div class="col-sm-2">
-                <img src="{{ $persona->imagen }}" alt="" width="200px" height="200px" id="imagen">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <td>Cédula</td>
-                            <td>Nombre</td>
-                            <td>Apellido</td>
-                            <td>Dirección</td>
-                            <td>Teléfono</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{ $persona->cedula }}</td>
-                            <td>{{ $persona->nombre }}</td>
-                            <td>{{ $persona->apellido }}</td>
-                            <td>{{ $persona->direccion }}</td>
-                            <td>{{ $persona->telefono }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h2 class="text-danger">Acceso no autorizado</h2>
+                <a href="{{ route('personas.index') }}">Regresar al inicio</a>
             </div>
         </div>
     </div>

@@ -72,6 +72,7 @@ class MascotaController extends Controller
     {
         $mascota = Mascota::find($id);
         $persona = Persona::find($mascota->persona_id);
+        // $persona = $mascota->persona;
         $colores = Color::all();
         return view('mascotas.edit', compact(['mascota', 'persona', 'colores']));
     }
