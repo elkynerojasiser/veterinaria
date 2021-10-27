@@ -18,54 +18,88 @@
         <div class="row">
             <div class="col text-center">
                 <h1 class="text-primary">
-                    Crear nueva mascota
+                    Editar mascota
                 </h1>
             </div>
         </div>
         <div class="row pt-3 pb-3">
             <div class="col">
-                <a href="{{ route('mascotas.index',['persona_id' => $persona->id]) }}" class="btn btn-primary">Regresar al listado</a>
+                <a href="{{ route('mascotas.index', ['persona_id' => $persona->id]) }}"
+                    class="btn btn-primary">Regresar
+                    al listado</a>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <form action="{{ route('mascotas.store') }}" method="POST">
+                <form action="{{ route('mascotas.update', ['mascota' => $mascota->id]) }}" method="POST">
+                    {{ method_field('PUT') }}
                     @csrf
                     <input type="hidden" value="{{ $persona->id }}" name="persona_id">
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre">
+                        <input type="text" class="form-control" id="nombre" name="nombre"
+                            value="{{ $mascota->nombre }}">
                     </div>
                     <div class="form-group">
                         <label for="especie">Especie</label>
                         <select class="form-control" name="especie" id="especie">
                             <option value="">--Seleccione--</option>
-                            <option value="canino">Canino</option>
-                            <option value="felino">Felino</option>
-                            <option value="ave">Ave</option>
-                            <option value="reptil">Reptil</option>
-                            <option value="bovino">Bovino</option>
-                            <option value="equino">Equino</option>
+                            @if ($mascota->especie == 'canino')
+                                <option value="canino" selected>Canino</option>
+                            @else
+                                <option value="canino">Canino</option>
+                            @endif
+                            @if ($mascota->especie == 'felino')
+                                <option value="felino" selected>Felino</option>
+                            @else
+                                <option value="felino">Felino</option>
+                            @endif
+                            @if ($mascota->especie == 'ave')
+                                <option value="ave" selected>Ave</option>
+                            @else
+                                <option value="ave">Ave</option>
+                            @endif
+                            @if ($mascota->especie == 'reptil')
+                                <option value="reptil" selected>Reptil</option>
+                            @else
+                                <option value="reptil">Reptil</option>
+                            @endif
+                            @if ($mascota->especie == 'bovino')
+                                <option value="bovino" selected>Bovino</option>
+                            @else
+                                <option value="bovino">Bovino</option>
+                            @endif
+                            @if ($mascota->especie == 'equino')
+                                <option value="equino" selected>Equino</option>
+                            @else
+                                <option value="equino">Equino</option>
+                            @endif
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="edad">Edad</label>
-                        <input type="number" class="form-control" id="edad" name="edad">
+                        <input type="number" class="form-control" id="edad" name="edad"
+                            value="{{ $mascota->edad }}">
                     </div>
                     <div class="form-group">
                         <label for="color">Color</label>
                         <select class="form-control" name="color_id" id="color">
                             <option value="0">--Seleccione--</option>
                             @foreach ($colores as $color)
-                                <option value="{{ $color->id }}">{{ $color->nombre }}</option>
+                                @if ($mascota->color_id == $color->id)
+                                    <option value="{{ $color->id }}" selected>{{ $color->nombre }}</option>
+                                @else
+                                    <option value="{{ $color->id }}">{{ $color->nombre }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="peso">Peso</label>
-                        <input type="number" class="form-control" id="peso" name="peso">
+                        <input type="number" class="form-control" id="peso" name="peso"
+                            value="{{ $mascota->peso }}">
                     </div>
-                    <button type="submit" class="btn btn-primary">Crear</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
             </div>
         </div>

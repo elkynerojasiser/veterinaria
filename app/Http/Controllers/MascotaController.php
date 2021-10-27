@@ -23,7 +23,7 @@ class MascotaController extends Controller
     {
         $persona = Persona::find($persona_id);
         $mascotas = $persona->mascotas;
-        return view('mascotas.index',compact(['persona','mascotas']));
+        return view('mascotas.index', compact(['persona', 'mascotas']));
     }
 
     /**
@@ -36,7 +36,7 @@ class MascotaController extends Controller
         $colores = Color::all();
         $persona = Persona::find($persona_id);
 
-        return view('mascotas.create',compact(['colores','persona']));
+        return view('mascotas.create', compact(['colores', 'persona']));
     }
 
     /**
@@ -48,7 +48,7 @@ class MascotaController extends Controller
     public function store(Request $request)
     {
         $mascota = Mascota::create($request->all());
-        return redirect()->route('mascotas.index',['persona_id' => $request->get('persona_id')]);
+        return redirect()->route('mascotas.index', ['persona_id' => $request->get('persona_id')]);
     }
 
     /**
@@ -70,7 +70,10 @@ class MascotaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mascota = Mascota::find($id);
+        $persona = Persona::find($mascota->persona_id);
+        $colores = Color::all();
+        return view('mascotas.edit', compact(['mascota', 'persona', 'colores']));
     }
 
     /**
@@ -82,7 +85,17 @@ class MascotaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $mascota = Mascota::find($id);
+        $mascota->fill($request->all());
+        $mascota->save();
+
+        return redirect()->route('mascotas.index', ['persona_id' => $mascota->persona_id]);
+    }
+
+    public function delete($id)
+    {
+        $mascota = Mascota::find($id);
+        return view('mascotas.delete', compact(['mascota']));
     }
 
     /**
@@ -93,6 +106,11 @@ class MascotaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $mascota = Mascota::find($id);
+        $persona = Persona::find($mascota->persona_id);
+
+        $mascota->delete();
+
+        return redirect()->route('mascotas.index', ['persona_id' => $persona->id]);
     }
 }

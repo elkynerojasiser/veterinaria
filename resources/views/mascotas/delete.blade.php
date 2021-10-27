@@ -18,42 +18,35 @@
         <div class="row">
             <div class="col text-center">
                 <h1 class="text-primary">
-                    Crear nueva persona
+                    Eliminar mascota
                 </h1>
             </div>
         </div>
         <div class="row pt-3 pb-3">
             <div class="col">
-                <a href="{{ route('personas.index') }}" class="btn btn-primary">Regresar al listado</a>
+                <a href="{{ route('mascotas.index', ['persona_id' => $mascota->persona_id]) }}"
+                    class="btn btn-primary">Regresar al listado</a>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <form action="{{ route('personas.store') }}" method="POST">
-
-                    <div class="form-group">
-                        <label for="cedula">Cédula</label>
-                        <input type="text" class="form-control" id="cedula" name="cedula">
-                    </div>
-                    <div class="form-group">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre">
-                    </div>
-                    <div class="form-group">
-                        <label for="apellido">Apellido</label>
-                        <input type="text" class="form-control" id="apellido" name="apellido">
-                    </div>
-                    <div class="form-group">
-                        <label for="direccion">Dirección</label>
-                        <input type="text" class="form-control" id="direccion" name="direccion">
-                    </div>
-                    <div class="form-group">
-                        <label for="telefono">Teléfono</label>
-                        <input type="text" class="form-control" id="telefono" name="telefono">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Crear</button>
+                <h3 class="text-danger">
+                    ¿Está seguro de eliminar a la mascota {{ $mascota->nombre }} ?
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form action="{{ route('mascotas.destroy', ['mascota' => $mascota->id]) }}" method="POST">
+                    {{ method_field('DELETE') }}
+                    @csrf
+                    <input type="hidden" value="{{ $mascota->id }}">
+                    <button class="btn btn-danger" type="submit">Eliminar</button>
                 </form>
+            </div>
+            <div class="col">
+                <a href="{{ route('mascotas.index', ['persona_id' => $mascota->persona_id]) }}"
+                    class="btn btn-success">Regresar</a>
             </div>
         </div>
     </div>
