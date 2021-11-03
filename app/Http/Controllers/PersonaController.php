@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PersonasStoreRequest;
+use App\Http\Requests\PersonasUpdateRequest;
 use App\Persona;
 
 class PersonaController extends Controller
@@ -81,7 +82,7 @@ class PersonaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PersonasUpdateRequest $request, $id)
     {
         $persona = Persona::find($id);
         // $persona->fill([

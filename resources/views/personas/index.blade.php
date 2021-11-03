@@ -1,85 +1,57 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <h1 class="text-primary">
-                    Listado de personas
-                </h1>
-            </div>
-        </div>
-        <div class="row pt-3 pb-3">
-            <div class="col">
-                <a href="{{ route('personas.create') }}" class="btn btn-primary">Nueva persona</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <table class="table table-bordered">
-                    <thead>
+@extends('layouts.template')
+@section('titulo', 'Listado de personas')
+@section('encabezado')
+    <i class="fa fa-align-justify"></i> Personas
+    <a type="button" class="btn btn-success" href="{{ route('personas.create') }}">
+        <i class="fa fa-plus"></i>&nbsp;Nuevo
+    </a>
+@endsection
+@section('contenido')
+    <div class="row">
+        <div class="col">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>Cédula</td>
+                        <td>Nombre</td>
+                        <td>Apellido</td>
+                        <td>Dirección</td>
+                        <td>Teléfono</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($personas as $persona)
                         <tr>
-                            <td>Cédula</td>
-                            <td>Nombre</td>
-                            <td>Apellido</td>
-                            <td>Dirección</td>
-                            <td>Teléfono</td>
-                            <td>Acciones</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($personas as $persona)
-                            <tr>
-                                <td>{{ $persona->cedula }}</td>
-                                <td>{{ $persona->nombre }}</td>
-                                <td>{{ $persona->apellido }}</td>
-                                <td>{{ $persona->direccion }}</td>
-                                <td>{{ $persona->telefono }}</td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col">
-                                            <a href="{{ route('personas.show',['persona'=>$persona->id]) }}" class="btn btn-info">Detalle</a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="{{ route('personas.edit',['persona'=>$persona->id]) }}" class="btn btn-warning">Editar</a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="{{ route('personas.delete',['persona' => $persona->id]) }}" class="btn btn-danger">Eliminar</a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="{{ route('mascotas.index',['persona_id' => $persona->id]) }}" class="btn btn-primary">Mascotas</a>
-                                        </div>
+                            <td>{{ $persona->cedula }}</td>
+                            <td>{{ $persona->nombre }}</td>
+                            <td>{{ $persona->apellido }}</td>
+                            <td>{{ $persona->direccion }}</td>
+                            <td>{{ $persona->telefono }}</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="{{ route('personas.show', ['persona' => $persona->id]) }}"
+                                            class="btn btn-info">Detalle</a>
                                     </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                                    <div class="col">
+                                        <a href="{{ route('personas.edit', ['persona' => $persona->id]) }}"
+                                            class="btn btn-warning">Editar</a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="{{ route('personas.delete', ['persona' => $persona->id]) }}"
+                                            class="btn btn-danger">Eliminar</a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="{{ route('mascotas.index', ['persona_id' => $persona->id]) }}"
+                                            class="btn btn-primary">Mascotas</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-    -->
-  </body>
-</html>
+@endsection
