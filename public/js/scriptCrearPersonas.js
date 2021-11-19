@@ -23,40 +23,90 @@ var imagen = document.getElementById('imagen');
             reader.readAsDataURL(file);
         }
     });
+
 /* -------------------------------------------------------------------------------*/
 
-/* Petición a ruta api */
+/* Función que envia los datos del formulario*/
 
-// function prueba() {
-//     $.ajax({
-//         url: '/api/prueba',
-//         type: 'GET',
-//         dataType: 'json',
-//         success : function(res) {
-//             alert(res.mensaje);
-//         },
-//         error : function(error) {
-//             console.log(error);
-//         }
-//     })
-// }
-
-function prueba() {
+function enviarFormulario() {
     $.ajax({
         url: '/api/personas',
-        type: 'GET',
+        method: 'POST',
         dataType: 'json',
-        success : function(res) {
-            console.log(res);
+        data: {
+            cedula : $("#cedula").val(),
+            nombre: $("#nombre").val(),
+            apellido: $("#apellido").val(),
+            direccion: $("#direccion").val(),
+            telefono: $("#telefono").val()
         },
-        error : function(error) {
-            console.log(error);
+        success : function(res) {
+            alert(res.mensaje);
+        },
+        error: function(errors){
+            alert('Ocurrió un error al crear la persona');
+        }
+    })
+}
+/* -------------------------------------------------------------------------------*/
+
+/* Evento click del botón crear */
+
+$("#btn-crear").on("click",function(event){
+    event.preventDefault();
+    validarFormulario();
+    if($("#form-crear-persona").valid()){
+        enviarFormulario();
+    }else{
+        return;
+    }
+});
+
+/* -------------------------------------------------------------------------------*/
+
+/* Validación del formulario */
+
+function validarFormulario(){
+    $("#form-crear-persona").validate({
+        rules: {
+            cedula: {
+                required: true,
+                minlength: 3,
+                maxlength: 10
+            },
+            nombre: {
+                required: true
+            },
+            apellido: {
+                required: true
+            },
+            direccion: {
+                required: true
+            },
+            telefono: {
+                required: true
+            }
+        },
+        messages: {
+            cedula: {
+                required: 'El campo cédula es obligatorio',
+                minlength: 'La cédula no alcanza la longitud mínima',
+                maxlength: 'La cédula excede la longitud máxima'
+            },
+            nombre: {
+                required: 'El campo nombre es obligatorio'
+            },
+            apellido: {
+                required: 'El campo apellido es obligatorio'
+            },
+            direccion: {
+                required: 'El campo dirección es obligatorio'
+            },
+            telefono: {
+                required: 'El campo teléfono es obligatorio'
+            }
         }
     })
 }
 
-/* Evento click de botón prueba */
-
-$('#btn-prueba').on('click',function(){
-    prueba();
-})
+/* -------------------------------------------------------------------------------*/

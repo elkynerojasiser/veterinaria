@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{ asset('css/ionicons.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
@@ -117,7 +119,7 @@
 
     </div>
     <!-- ./wrapper -->
-    
+
     @include('layouts.scripts')
     @yield('scripts')
 </body>

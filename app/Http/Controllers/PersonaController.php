@@ -39,14 +39,10 @@ class PersonaController extends Controller
     public function store(PersonasStoreRequest $request)
     {
         Persona::create($request->all());
-        // Persona::create([
-        //     "cedula"    => $request->get('cedula'),
-        //     "nombre"    => $request->get('nombre'),
-        //     "apellido"  => $request->get('apellido'),
-        //     "direccion" => $request->get('direccion'),
-        //     "telefono"  => $request->get('telefono')
-        // ]);
-        return redirect()->route('personas.index');
+        return response()->json([
+            'mensaje' => 'La persona se creó correctamente',
+            'tipo'    => 'success'
+        ]);
     }
 
     /**

@@ -4,7 +4,7 @@
 @section('contenido')
     <div class="row">
         <div class="col">
-            <form action="{{ route('personas.store') }}" method="POST" enctype="multipart/form-data" novalidate>
+            <form action="{{ route('personas.store') }}" method="POST" enctype="multipart/form-data" id="form-crear-persona" novalidate>
                 @csrf
                 <div class="row d-flex justify-content-center">
                     <div class="col-sm-2">
@@ -49,8 +49,7 @@
                     @enderror
                 </div>
 
-                <button type="submit" class="btn btn-primary">Crear</button>
-                <button type="button" id="btn-prueba" class="btn btn-primary">Prueba</button>
+                <button type="submit" id="btn-crear" class="btn btn-primary">Crear</button>
             </form>
         </div>
     </div>

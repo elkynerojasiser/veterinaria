@@ -1,7 +1,7 @@
 
 function listarPersonas() {
     $.ajax({
-        url: '/api/personas',
+        url: '/api/personas-list',
         type: 'GET',
         dataType: 'json',
         success : function(res) {

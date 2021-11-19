@@ -19,4 +19,6 @@ use Illuminate\Http\Request;
 
 Route::get('prueba','PersonaController@prueba');
 
-Route::get('personas','PersonaController@listarPersonas');
+Route::get('personas-list','PersonaController@listarPersonas');
+
+Route::resource('personas','PersonaController');
