@@ -50,34 +50,11 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Crear</button>
+                <button type="button" id="btn-prueba" class="btn btn-primary">Prueba</button>
             </form>
         </div>
     </div>
 @endsection
 @section('scripts')
-<script>
-    var imagen = document.getElementById('imagen');
-    var input_imagen = document.getElementById('input_imagen');
-    var text_imagen = document.getElementById('text_imagen');
-
-    imagen.addEventListener('click', function() {
-        input_imagen.click();
-    });
-
-    input_imagen.addEventListener('change', function() {
-        var file = this.files[0];
-        var sizebyte = this.files[0].size;
-        var sizekilobyte = parseInt(sizebyte / 1024);
-        if (sizekilobyte > 1024) {
-            alert('La imagen excede el tamaño permitido de 1 MB');
-        } else {
-            var reader = new FileReader();
-            reader.onloadend = function() {
-                document.getElementById("imagen").src = reader.result;
-                text_imagen.value = reader.result;
-            }
-            reader.readAsDataURL(file);
-        }
-    });
-</script>
+<script src="{{ asset('js/scriptCrearPersonas.js') }}"></script>
 @endsection

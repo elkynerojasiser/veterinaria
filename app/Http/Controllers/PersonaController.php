@@ -113,4 +113,21 @@ class PersonaController extends Controller
         $persona = Persona::find($id);
         return view('personas.delete', compact(['persona']));
     }
+
+    public function prueba() {
+        return response()->json([
+            'mensaje' => 'Funciona la ruta api'
+        ]);
+    }
+
+    public function listarPersonas()
+    {
+        $personas = Persona::all();
+
+        return response([
+            'personas' => $personas,
+            'mensaje' => 'Listado de personas',
+            'tipo'    => 'success'
+        ]);
+    }
 }

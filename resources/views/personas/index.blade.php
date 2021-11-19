@@ -5,11 +5,12 @@
     <a type="button" class="btn btn-success" href="{{ route('personas.create') }}">
         <i class="fa fa-plus"></i>&nbsp;Nuevo
     </a>
+    <button id="btn-cargar" type="button" class="btn btn-info">Cargar Personas</button>
 @endsection
 @section('contenido')
     <div class="row">
         <div class="col">
-            <table class="table table-bordered">
+            <table id="tabla-personas" class="table table-bordered">
                 <thead>
                     <tr>
                         <td>Cédula</td>
@@ -21,7 +22,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($personas as $persona)
+                    <!-- @foreach ($personas as $persona)
                         <tr>
                             <td>{{ $persona->cedula }}</td>
                             <td>{{ $persona->nombre }}</td>
@@ -49,9 +50,12 @@
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
+                    @endforeach -->
                 </tbody>
             </table>
         </div>
     </div>
+@endsection
+@section('scripts')
+<script src="{{ asset('js/scriptListarPersonas.js') }}" ></script>
 @endsection

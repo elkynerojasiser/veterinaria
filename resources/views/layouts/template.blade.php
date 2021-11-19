@@ -117,7 +117,7 @@
 
     </div>
     <!-- ./wrapper -->
-
+    
     @include('layouts.scripts')
     @yield('scripts')
 </body>
